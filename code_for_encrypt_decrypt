@@ -1,0 +1,51 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+//function for the encryption 
+string encryptCaesar(const string& message, int shift) {
+    string encryptedMessage = "";
+    for (char c : message) {
+        if (isalpha(c)) {
+            char shiftedChar = (toupper(c) - 'A' + shift) % 26 + 'A';
+            encryptedMessage += shiftedChar;
+        } else {
+            encryptedMessage += c;
+        }
+    }
+    return encryptedMessage;
+}
+
+//function for the decryption 
+ string decryptCaesar(const string& message, int shift) {
+
+    string decryptedMessage = "";
+   shift = shift%26;
+    for (char c : message) {
+        if (isalpha(c)) {
+            char shiftedChar = (toupper(c) - 'A' + 26 - shift) % 26 + 'A';
+            decryptedMessage += shiftedChar;
+        } else {
+            decryptedMessage += c;
+        }
+    }
+    return decryptedMessage;
+}
+
+int main() {
+    string message;
+    int shift;
+
+    cout << "Enter a message: ";
+    getline(cin, message);
+
+    cout << "Enter a shift value: ";
+    cin >> shift;
+
+    string encrypt = encryptCaesar(message, shift);
+    cout << "Encrypted message: " << encrypt << endl;
+
+    string decrypt = decryptCaesar(message, shift);
+    cout << "Decrypted message: " << decrypt << endl;
+    return 0;
+}
